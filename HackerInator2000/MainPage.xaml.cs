@@ -7,7 +7,9 @@ public partial class MainPage : ContentPage
     private readonly List<ICipher> _ciphers = new()
 {
     new CaesarCipher(),
-    new DesCipher() 
+    new DesCipher(),
+    new AdfgvxCipher(),
+    new StreamCipher()
 };
 
     private class LastOperation
@@ -195,6 +197,16 @@ public partial class MainPage : ContentPage
             else if (cipher is DesCipher)
             {
                 KeyEntry.Placeholder = "Ключ (до 8 символов, например: secret12)";
+            }
+            else if (cipher is AdfgvxCipher)
+            {
+                KeyEntry.Placeholder = "Ключевое слово (латиница, например: SECRET)";
+                KeyEntry.Keyboard = Keyboard.Text;
+            }
+            else if (cipher is StreamCipher)
+            {
+                KeyEntry.Placeholder = "Любая строка (например: )";
+                KeyEntry.Keyboard = Keyboard.Default;
             }
         }
     }

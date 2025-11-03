@@ -2,131 +2,121 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="HackerInator2000.MainPage"
-             BackgroundColor="Transparent">
+             BackgroundColor="#000000"
+             Padding="20">
 
-    <Grid>
-        <Image Source="hacker-bg.jpg"
-               Aspect="AspectFill"
-               Opacity="0.7" />
+    <ScrollView>
+        <VerticalStackLayout Spacing="20" HorizontalOptions="Center" WidthRequest="360">
 
-        <ScrollView>
-            <VerticalStackLayout Spacing="20" 
-                                 HorizontalOptions="Center" 
-                                 WidthRequest="360"
-                                 Margin="20">
+            <Label Text="Хакер с ИБ"
+                   FontSize="28"
+                   FontAttributes="Bold"
+                   TextColor="#FFFFFF"
+                   HorizontalOptions="Center"
+                   Margin="0,20,0,10" />
 
-                <Label Text="ХакерИнатор2000"
-                       FontSize="28"
-                       FontAttributes="Bold"
-                       TextColor="#1e293b"
-                       HorizontalOptions="Center"
-                       Margin="0,20,0,10" />
+            <Frame CornerRadius="14"
+                   Padding="0"
+                   HasShadow="True"
+                   BackgroundColor="#121212"
+                   BorderColor="#333333"
+                   HeightRequest="100">
+                <Editor x:Name="InputEditor"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="Transparent"
+                        Placeholder="Введите текст..."
+                        PlaceholderColor="#B0B0B0"
+                        FontSize="14"
+                        VerticalOptions="FillAndExpand" />
+            </Frame>
 
-                <Frame CornerRadius="14"
+            <Picker x:Name="ActionPicker"
+                    BackgroundColor="#121212"
+                    TextColor="#FFFFFF"
+                    Title="Выберите действие:"
+                    TitleColor="#B0B0B0"
+                    SelectedIndexChanged="OnActionChanged" />
+
+            <Picker x:Name="MethodPicker"
+                    BackgroundColor="#121212"
+                    TextColor="#FFFFFF"
+                    Title="Выберите метод:"
+                    TitleColor="#B0B0B0"
+                    SelectedIndexChanged="OnMethodChanged" />
+
+            <StackLayout x:Name="KeyInputLayout" IsVisible="False" Spacing="5">
+                <Label Text="Ключ:" TextColor="#FFFFFF" FontSize="14" />
+                <Frame CornerRadius="10"
                        Padding="0"
-                       HasShadow="True"             
-                       BackgroundColor="#1e293b"
-                       BorderColor="#38bdf8"
-                       HeightRequest="100">
-                    <Editor x:Name="InputEditor"
-                            TextColor="#f1f5f9"
-                            BackgroundColor="Transparent"
-                            Placeholder="Введите текст на кириллице..."
-                            PlaceholderColor="#94a3b8"
-                            FontSize="14"
-                            VerticalOptions="FillAndExpand" />
+                       HasShadow="False"
+                       BackgroundColor="#121212"
+                       BorderColor="#333333"
+                       HeightRequest="44">
+                    <Entry x:Name="KeyEntry"
+                           TextColor="#FFFFFF"
+                           BackgroundColor="Transparent"
+                           Placeholder="Введите ключ"
+                           PlaceholderColor="#B0B0B0"
+                           FontSize="14"
+                           VerticalOptions="Center"
+                           Margin="12,0" />
                 </Frame>
+            </StackLayout>
 
-                <!--выбор действия-->
-                
-                <Picker x:Name="ActionPicker"
-                        BackgroundColor="#1e293b"
-                        TextColor="#f1f5f9"
-                        Title="Выберите действие"
-                        TitleColor="#f1f5f9"
-                        SelectedIndexChanged="OnActionChanged" />
+            <Button Text="Выполнить"
+                    Clicked="OnExecuteClicked"
+                    BackgroundColor="#FFFFFF"
+                    TextColor="#000000"
+                    FontAttributes="Bold"
+                    CornerRadius="26"
+                    HeightRequest="52"
+                    FontSize="16"
+                    Margin="0,10" />
 
-                <!--выбор метода-->
-                <Picker x:Name="MethodPicker"
-                        BackgroundColor="#1e293b"
-                        TextColor="#f1f5f9"
-                        Title="Выберите метод"
-                        TitleColor="#f1f5f9"
-                        SelectedIndexChanged="OnMethodChanged" />
+            <Label Text="Результат:" TextColor="#FFFFFF" FontSize="14" FontAttributes="Bold" />
+            <Frame CornerRadius="14"
+                   Padding="0"
+                   HasShadow="True"
+                   BackgroundColor="#121212"
+                   BorderColor="#333333"
+                   HeightRequest="120">
+                <Editor x:Name="OutputEditor"
+                        IsReadOnly="True"
+                        TextColor="#FFFFFF"
+                        BackgroundColor="Transparent"
+                        FontSize="14"
+                        VerticalOptions="FillAndExpand" />
+            </Frame>
 
-                <StackLayout x:Name="KeyInputLayout" IsVisible="False" Spacing="5">
-                    <Label Text="Ключ (1–32):" TextColor="#f1f5f9" FontSize="14" />
-                    <Frame CornerRadius="10"
-                           Padding="0"
-                           HasShadow="False"
-                           BackgroundColor="#1e293b"
-                           BorderColor="#38bdf8"
-                           HeightRequest="44">
-                        <Entry x:Name="KeyEntry"
-                               TextColor="#f1f5f9"
-                               BackgroundColor="Transparent"
-                               Placeholder="Например: 3"
-                               PlaceholderColor="#94a3b8"
-                               Keyboard="Numeric"
-                               FontSize="14"
-                               VerticalOptions="Center"
-                               Margin="12,0" />
-                    </Frame>
-                </StackLayout>
+            <HorizontalStackLayout x:Name="QuickActionsLayout"
+                                   IsVisible="False"
+                                   Spacing="12"
+                                   HorizontalOptions="Center"
+                                   Margin="0,10">
 
-                <Button Text="Выполнить"
-                        Clicked="OnExecuteClicked"
-                        BackgroundColor="#2dd4bf"
-                        TextColor="#0f172a"
-                        FontAttributes="Bold"
-                        CornerRadius="26"
-                        HeightRequest="52"
-                        FontSize="16"
-                        Margin="0,10" />
+                <Button Text="Дешифровать"
+                        Clicked="OnDecryptResultClicked"
+                        BackgroundColor="#1E1E1E"
+                        TextColor="#E0E0E0"
+                        CornerRadius="22"
+                        FontSize="13"
+                        HeightRequest="44"
+                        WidthRequest="140"
+                        BorderColor="#333333"
+                        BorderWidth="1" />
 
-                <Label Text="Результат:" TextColor="#2dd4bf" FontSize="14" FontAttributes="Bold" />
-                <Frame CornerRadius="14"
-                       Padding="0"
-                       HasShadow="True"
-                       BackgroundColor="#1e293b"
-                       BorderColor="#38bdf8"
-                       HeightRequest="120">
-                    <Editor x:Name="OutputEditor"
-                            IsReadOnly="True"
-                            TextColor="#f1f5f9"
-                            BackgroundColor="Transparent"
-                            FontSize="14"
-                            VerticalOptions="FillAndExpand" />
-                </Frame>
+                <Button Text="Взломать"
+                        Clicked="OnBreakResultClicked"
+                        BackgroundColor="#1E1E1E"
+                        TextColor="#E0E0E0"
+                        CornerRadius="22"
+                        FontSize="13"
+                        HeightRequest="44"
+                        WidthRequest="140"
+                        BorderColor="#333333"
+                        BorderWidth="1" />
+            </HorizontalStackLayout>
 
-                <HorizontalStackLayout x:Name="QuickActionsLayout"
-                                       IsVisible="False"
-                                       Spacing="12"
-                                       HorizontalOptions="Center"
-                                       Margin="0,10">
-                    <Button Text="Дешифровать"
-                            Clicked="OnDecryptResultClicked"
-                            BackgroundColor="#1e293b"
-                            TextColor="#2dd4bf"
-                            CornerRadius="22"
-                            FontSize="13"
-                            HeightRequest="44"
-                            WidthRequest="140"
-                            BorderColor="#2dd4bf"
-                            BorderWidth="1.5" />
-                    <Button Text="Взломать"
-                            Clicked="OnBreakResultClicked"
-                            BackgroundColor="#1e293b"
-                            TextColor="#c084fc"
-                            CornerRadius="22"
-                            FontSize="13"
-                            HeightRequest="44"
-                            WidthRequest="140"
-                            BorderColor="#c084fc"
-                            BorderWidth="1.5" />
-                </HorizontalStackLayout>
-
-            </VerticalStackLayout>
-        </ScrollView>
-    </Grid>
+        </VerticalStackLayout>
+    </ScrollView>
 </ContentPage>

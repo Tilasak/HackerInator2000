@@ -42,7 +42,6 @@ public class DesCipher : ICipher
 
     public List<string> Break(string input)
     {
-        // Не поддерживается
         return new List<string> { "Взлом DES невозможен в этом приложении." };
     }
 
@@ -54,12 +53,10 @@ public class DesCipher : ICipher
         byte[] keyBytes = Encoding.UTF8.GetBytes(key);
         if (keyBytes.Length < 8)
         {
-            // Дополняем нулями до 8 байт
             Array.Resize(ref keyBytes, 8);
         }
         else if (keyBytes.Length > 8)
         {
-            // Обрезаем до 8 байт
             keyBytes = keyBytes[..8];
         }
         return keyBytes;
