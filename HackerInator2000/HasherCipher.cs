@@ -4,7 +4,7 @@ namespace HackerInator2000;
 
 public class HashCipher : ICipher
 {
-    public string Name => "Хеш (SHA-1 учебный)";
+    public string Name => "Хеш";
     public bool SupportsBreak => false;
 
     public string Encrypt(string input, string key)

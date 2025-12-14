@@ -5,7 +5,7 @@ namespace HackerInator2000;
 
 public class ElGamalSignature : ICipher
 {
-    public string Name => "Эль-Гамаль (подпись)";
+    public string Name => "Эль-Гамаль";
     public bool SupportsBreak => false;
 
     public string Encrypt(string input, string key)
