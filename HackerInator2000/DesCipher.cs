@@ -1,11 +1,10 @@
-﻿// DesCipher.cs
-using System.Text;
+﻿using System.Text;
 
 namespace HackerInator2000;
 
 public class DesCipher : ICipher
 {
-    public string Name => "DES(NEW)";
+    public string Name => "DES";
     public bool SupportsBreak => false;
 
     private static readonly int[] IP = {

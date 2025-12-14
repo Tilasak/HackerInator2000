@@ -44,7 +44,7 @@
                     TitleColor="#B0B0B0"
                     SelectedIndexChanged="OnMethodChanged" />
 
-            <StackLayout x:Name="KeyInputLayout" IsVisible="False" Spacing="5">
+            <StackLayout x:Name="KeyInputLayout" IsVisible="True" Spacing="5">
                 <Label Text="Ключ:" TextColor="#FFFFFF" FontSize="14" />
                 <Frame CornerRadius="10"
                        Padding="0"
@@ -62,6 +62,32 @@
                            Margin="12,0" />
                 </Frame>
             </StackLayout>
+
+            <Grid x:Name="ElGamalParamsLayout" IsVisible="False" RowDefinitions="Auto,Auto,Auto,Auto,Auto,Auto" ColumnDefinitions="*,*" RowSpacing="8" ColumnSpacing="8">
+
+                <Label Text="p (простое, напр. 2357)" Grid.Row="0" Grid.Column="0" TextColor="#FFFFFF" FontSize="12" VerticalOptions="Center" />
+                <Entry x:Name="PEditor" Grid.Row="0" Grid.Column="1" TextColor="#FFFFFF" BackgroundColor="#1E1E1E" Placeholder="2357" />
+
+                <Label Text="g (примитивный корень, напр. 2)" Grid.Row="1" Grid.Column="0" TextColor="#FFFFFF" FontSize="12" VerticalOptions="Center" />
+                <Entry x:Name="GEditor" Grid.Row="1" Grid.Column="1" TextColor="#FFFFFF" BackgroundColor="#1E1E1E" Placeholder="2" />
+
+                <Label Text="x (секретный ключ, 1&lt;x&lt;p−1)" x:Name="XLabel" Grid.Row="2" Grid.Column="0" TextColor="#FFFFFF" FontSize="12" VerticalOptions="Center" />
+                <Entry x:Name="XEditor" Grid.Row="2" Grid.Column="1" TextColor="#FFFFFF" BackgroundColor="#1E1E1E" Placeholder="1751" />
+
+                <Label Text="y = gˣ mod p (публичный ключ)" x:Name="YLabel" Grid.Row="3" Grid.Column="0" TextColor="#FFFFFF" FontSize="12" VerticalOptions="Center" IsVisible="False" />
+                <Entry x:Name="YEditor" Grid.Row="3" Grid.Column="1" TextColor="#FFFFFF" BackgroundColor="#1E1E1E" Placeholder="1185" IsVisible="False" />
+
+                <Label Text="Подпись (r,s)" x:Name="SigLabel" Grid.Row="4" Grid.Column="0" TextColor="#FFFFFF" FontSize="12" VerticalOptions="Center" IsVisible="False" />
+                <Entry x:Name="SigEditor" Grid.Row="4" Grid.Column="1" TextColor="#FFFFFF" BackgroundColor="#1E1E1E" Placeholder="r,s" IsVisible="False" />
+
+                <HorizontalStackLayout Grid.Row="5" Grid.ColumnSpan="2" Spacing="10" HorizontalOptions="End">
+                    <Button Text="Сгенерировать" Clicked="OnGenerateElGamalClicked"
+                            BackgroundColor="#444444" TextColor="#E0E0E0" FontSize="12" HeightRequest="36" />
+                    <Button Text="?" Clicked="OnElGamalHelpClicked"
+                            BackgroundColor="#333333" TextColor="#FFFFFF" FontSize="16" WidthRequest="36" HeightRequest="36" CornerRadius="18" />
+                </HorizontalStackLayout>
+
+            </Grid>
 
             <Button Text="Выполнить"
                     Clicked="OnExecuteClicked"
